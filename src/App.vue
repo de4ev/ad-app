@@ -5,8 +5,8 @@
     >
       <v-list>
         <v-list-tile 
-          v-for="(link, i) in links"
-          :key= "link.title"
+          v-for='(link, i) in links'
+          :key= 'link.title'
           :to="link.url"
         >
             <v-list-tile-action>
@@ -18,12 +18,15 @@
           </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app>
+    <v-toolbar dark app color='blue-grey darken-3'>
       <v-toolbar-side-icon
+        class='hidden-md-and-up'
         @click="drawer = !drawer"
         >
       </v-toolbar-side-icon>
-      <v-toolbar-title>Ad application</v-toolbar-title>
+      <v-toolbar-title>
+        <router-link to="/" class='pointer' tag="span">Ad application</router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class='hidden-sm-and-down'>
         <v-btn
@@ -48,10 +51,20 @@ export default {
   data () {
     return {
       drawer: false,
-      links: [{ title: 'Login', icon: 'lock', url: '/login'},
-        {title: 'Registration', icon: 'person', url: '/registration'}
+      links: [{title: 'Login', icon: 'lock', url: '/login'},
+        {title: 'Registration', icon: 'person', url: '/registration'},
+        {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
+        {title: 'New ad', icon: 'note_add', url: '/new'},
+        {title: 'My ads', icon: 'list', url: '/list'}
       ]
     }
   }
 }
 </script>
+
+<style scoped>
+  .pointer {
+    cursor: pointer;
+  }
+</style>
+

@@ -7,7 +7,7 @@
         <v-list-tile 
           v-for='(link, i) in links'
           :key= 'link.title'
-          :to="link.url"
+          to="link.url"
         >
             <v-list-tile-action>
               <v-icon>{{ links[i].icon }}</v-icon>

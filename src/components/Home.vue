@@ -30,8 +30,8 @@
                   </v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="orange">Open</v-btn>
-                    <v-btn color="orange">Buy</v-btn>
+                    <v-btn flat color="orange accent-2">Open</v-btn>
+                    <v-btn color="orange accent-2">Buy</v-btn>
                   </v-card-actions>
                 </v-card>
             </v-flex>
@@ -48,24 +48,28 @@ export default {
           title: 'First ad',
           description: 'Description',
           src: 'https://vuetifyjs.com/static/doc-images/carousel/squirrel.jpg',
+          promo: false,
           id: 1
         },
         {
           title: 'Second ad',
           description: 'Description',
           src: 'https://vuetifyjs.com/static/doc-images/carousel/sky.jpg',
+          promo: true,
           id: 2
         },
         {
           title: 'Third ad',
           description: 'Description',
           src: 'https://vuetifyjs.com/static/doc-images/carousel/bird.jpg',
+          promo: true,
           id: 3
         },
         {
           title: 'Last ad',
           description: 'Description',
           src: 'https://vuetifyjs.com/static/doc-images/carousel/planet.jpg',
+          promo: false,
           id: 4
         }
       ]

@@ -5,7 +5,7 @@
               <h1 class="text--secondary mb-2">My ads</h1>
               <v-card
                 class="elevation-10 mb-3"
-                v-for="ad in ads"
+                v-for="ad in userAds"
                 :key="ad.id"
               >
                 <v-card-media 
@@ -40,38 +40,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      ads: [
-        {
-          title: 'First ad',
-          description: 'Description',
-          src: 'https://vuetifyjs.com/static/doc-images/carousel/squirrel.jpg',
-          promo: false,
-          id: 1
-        },
-        {
-          title: 'Second ad',
-          description: 'Description',
-          src: 'https://vuetifyjs.com/static/doc-images/carousel/sky.jpg',
-          promo: true,
-          id: 2
-        },
-        {
-          title: 'Third ad',
-          description: 'Description',
-          src: 'https://vuetifyjs.com/static/doc-images/carousel/bird.jpg',
-          promo: true,
-          id: 3
-        },
-        {
-          title: 'Last ad',
-          description: 'Description',
-          src: 'https://vuetifyjs.com/static/doc-images/carousel/planet.jpg',
-          promo: false,
-          id: 4
-        }
-      ]
+  computed: {
+    userAds () {
+      return this.$store.getters.userAds
     }
   }
 }

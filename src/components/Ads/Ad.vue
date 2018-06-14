@@ -2,14 +2,14 @@
     <v-container>
         <v-layout row>
             <v-flex xs12>
-                <h1 class="text--secondary mb-2">Title</h1>
+                <h1 class="text--secondary mb-2">{{ad.title}}</h1>
                 <v-card>
                 <v-card-media
                   height="350px"
-                  src="https://vuetifyjs.com/static/doc-images/carousel/squirrel.jpg"
+                  :src="ad.src"
                 ></v-card-media>
                 <v-card-text>
-                    <span>Description</span>
+                    <span>{{ad.description}}</span>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -23,9 +23,13 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {}
+  export default {
+    props: ['id'],
+    computed: {
+      ad () {
+        const id = this.id
+        return this.$store.getters.adById(id)
+      }
+    }
   }
-}
 </script>

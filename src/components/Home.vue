@@ -4,7 +4,11 @@
       <v-layout row>
         <v-flex xs12>
           <v-carousel>
-            <v-carousel-item v-for="ad in promoAds" :src="ad.src" :key="ad.id"></v-carousel-item>
+            <v-carousel-item 
+              v-for="ad in promoAds"
+              :src="ad.src"
+              :key="ad.id"
+            ></v-carousel-item>
           </v-carousel>
         </v-flex>
       </v-layout>
@@ -20,7 +24,11 @@
               :key='ad.id'
             >
                 <v-card>
-                  <v-card-media :src="ad.src" height="200px">
+                  <v-card-media
+                  :to="'/ad/' + ad.id"
+                    :src="ad.src"
+                    height="200px"
+                  >
                   </v-card-media>
                   <v-card-title primary-title>
                     <div>
@@ -30,7 +38,11 @@
                   </v-card-title>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="orange accent-2">Open</v-btn>
+                    <v-btn 
+                      flat
+                      color="orange accent-2"
+                      :to="'/ad/' + ad.id"
+                    >Open</v-btn>
                     <v-btn color="orange accent-2">Buy</v-btn>
                   </v-card-actions>
                 </v-card>

@@ -53,7 +53,7 @@
                         ></v-switch>
                         <v-btn
                           :disabled="!valid"
-                          @click="addAd"
+                          @click="createAd"
                           color="orange accent-2"
                           class="white--text mt-2"
                           >
@@ -77,14 +77,15 @@ export default {
     }
   },
   methods: {
-    addAd () {
+    createAd () {
       if (this.$refs.form.validate()) {
         const ad = {
           title: this.title,
           description: this.description,
-          promo: this.promo
+          promo: this.promo,
+          src: 'https://geekmaze.ru/wp-content/uploads/2016/02/nodejs-2560x1440.png'
         }
-        console.log(ad)
+        this.$store.dispatch('createAd', ad)
       }
     }
   }

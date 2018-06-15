@@ -3,7 +3,9 @@
         <v-layout row>
             <v-flex xs12>
                 <h1 class="text--secondary mb-2">{{ad.title}}</h1>
-                <v-card>
+                <v-card
+                  class="elevation-12"
+                >
                 <v-card-media
                   height="350px"
                   :src="ad.src"

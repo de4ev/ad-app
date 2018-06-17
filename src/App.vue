@@ -43,6 +43,16 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+    <template v-if="error">
+      <v-snackbar
+        :multi-line="true"
+        color="blue-grey darken-3"
+        :value="true"
+      >
+        {{ error }}
+        <v-btn flat color="error" @click.native="closeError">Close</v-btn>
+      </v-snackbar>
+    </template>
   </v-app>
 </template>
 
@@ -51,12 +61,23 @@ export default {
   data () {
     return {
       drawer: false,
-      links: [{title: 'Login', icon: 'lock', url: '/login'},
+      links: [
+        {title: 'Login', icon: 'lock', url: '/login'},
         {title: 'Registration', icon: 'person', url: '/registration'},
         {title: 'Orders', icon: 'bookmark_border', url: '/orders'},
         {title: 'New ad', icon: 'note_add', url: '/new'},
         {title: 'My ads', icon: 'list', url: '/list'}
       ]
+    }
+  },
+  computed: {
+    error () {
+      return this.$store.getters.error
+    }
+  },
+  methods: {
+    closeError () {
+      this.$store.dispatch('clearError')
     }
   }
 }

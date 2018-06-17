@@ -26,5 +26,10 @@ new Vue({
       storageBucket: 'dechev-ad-app.appspot.com',
       messagingSenderId: '506658506283'
     })
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoLogin', user)
+      }
+    })
   }
 })

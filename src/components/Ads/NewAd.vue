@@ -52,7 +52,8 @@
                           v-model="promo"
                         ></v-switch>
                         <v-btn
-                          :disabled="!valid"
+                          :loading="loading"
+                          :disabled="!valid || loading"
                           @click="createAd"
                           color="orange accent-2"
                           class="white--text mt-2"
@@ -76,6 +77,11 @@ export default {
       promo: false
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     createAd () {
       if (this.$refs.form.validate()) {
@@ -86,6 +92,10 @@ export default {
           src: 'https://geekmaze.ru/wp-content/uploads/2016/02/nodejs-2560x1440.png'
         }
         this.$store.dispatch('createAd', ad)
+          .then(() => {
+            this.$router.push('/list')
+          })
+          .catch(() => {})
       }
     }
   }

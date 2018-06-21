@@ -10,6 +10,7 @@ class Ad {
     this.id = id
   }
 }
+
 export default {
   state: {
     ads: [
@@ -53,7 +54,7 @@ export default {
       commit('clearError')
       commit('setLoading', true)
       try {
-        const newAd = Ad(
+        const newAd = new Ad(
           payload.title,
           payload.description,
           getters.user.id,

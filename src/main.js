@@ -31,5 +31,6 @@ new Vue({
         this.$store.dispatch('autoLogin', user)
       }
     })
+    this.$store.dispatch('fetchAds')
   }
 })

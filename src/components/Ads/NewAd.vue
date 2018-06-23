@@ -27,8 +27,8 @@
                 <v-layout row class="mt-3">
                   <v-flex xs12>
                     <img 
-                      v-if="imageSrc"
-                      :src="imageSrc"
+                      v-if="src"
+                      :src="src"
                       height="100"
                     >
                   </v-flex>
@@ -43,7 +43,13 @@
                       Upload
                       <v-icon right dark>add_a_photo</v-icon>
                     </v-btn>
-                    <input @change="onFileChange" ref="imageUpload" type="file" style="display:none" accept="image/*">
+                    <input 
+                      @change="onFileChange" 
+                      ref="imageUpload" 
+                      type="file" 
+                      style="display:none" 
+                      accept="image/*"
+                    >
                   </v-flex>
                 </v-layout>
                 <v-layout row>
@@ -56,7 +62,7 @@
                         ></v-switch>
                         <v-btn
                           :loading="loading"
-                          :disabled="!valid || loading || !this.image"
+                          :disabled="!valid || loading || !image"
                           @click="createAd"
                           color="orange accent-2"
                           class="white--text mt-2"
@@ -78,7 +84,7 @@ export default {
       description: '',
       valid: false,
       promo: false,
-      imageSrc: '',
+      src: '',
       image: null
     }
   },
@@ -94,7 +100,7 @@ export default {
           title: this.title,
           description: this.description,
           promo: this.promo,
-          src: 'https://geekmaze.ru/wp-content/uploads/2016/02/nodejs-2560x1440.png'
+          image: this.image
         }
         this.$store.dispatch('createAd', ad)
           .then(() => {
@@ -110,7 +116,7 @@ export default {
       const file = event.target.files[0]
       const reader = new FileReader()
       reader.onload = e => {
-        this.imageSrc = reader.result
+        this.src = reader.result
       }
       reader.readAsDataURL(file)
       this.image = file

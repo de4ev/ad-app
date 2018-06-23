@@ -1,6 +1,6 @@
 <template>
   <div v-if="!loading">
-    <v-container fluid>
+    <v-container>
       <v-layout row>
         <v-flex xs12>
           <v-carousel>
@@ -53,7 +53,7 @@
   <div v-else>
     <v-container>
       <v-layout row>
-        <v-flex xs12 class="text-xs-center loader-margin">
+        <v-flex xs12 class="text-xs-center home__loader-margin">
           <v-progress-circular :size="70" :width="4" indeterminate color="orange accent-2"></v-progress-circular>
         </v-flex>
       </v-layout>
@@ -76,8 +76,11 @@ export default {
 }
 </script>
 
-<style scoped>
-  .loader-margin {
+<style>
+  .home__loader-margin {
     margin-top: 40vh;
+  }
+  .jumbotron__image {
+    width: 100%;
   }
 </style>

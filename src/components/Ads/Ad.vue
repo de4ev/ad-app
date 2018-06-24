@@ -15,7 +15,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="orange" >Edit</v-btn>
+                    <app-edit-ad-modal></app-edit-ad-modal>
                   <v-btn color="orange">Buy</v-btn>
                 </v-card-actions>
               </v-card>
@@ -25,13 +25,18 @@
 </template>
 
 <script>
-  export default {
-    props: ['id'],
-    computed: {
-      ad () {
-        const id = this.id
-        return this.$store.getters.adById(id)
-      }
+import EditAdModal from './EditAdModal'
+
+export default {
+  props: ['id'],
+  computed: {
+    ad () {
+      const id = this.id
+      return this.$store.getters.adById(id)
     }
+  },
+  components: {
+    AppEditAdModal: EditAdModal
   }
+}
 </script>

@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout row>
-            <v-flex xs12>
+            <v-flex xs12 v-if="!loading">
                 <h1 class="text--secondary mb-2">{{ad.title}}</h1>
                 <v-card
                   class="elevation-12"
@@ -15,10 +15,13 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                    <app-edit-ad-modal></app-edit-ad-modal>
+                    <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
                   <v-btn color="orange">Buy</v-btn>
                 </v-card-actions>
               </v-card>
+            </v-flex>
+            <v-flex xs12 v-else class="text-xs-center home__loader-margin">
+              <v-progress-circular :size="70" :width="4" indeterminate color="orange accent-2"></v-progress-circular>
             </v-flex>
         </v-layout>
     </v-container>

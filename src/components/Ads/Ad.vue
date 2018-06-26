@@ -15,7 +15,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                    <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
+                    <app-edit-ad-modal :ad="ad" v-if="isOwner"></app-edit-ad-modal>
                   <v-btn color="orange">Buy</v-btn>
                 </v-card-actions>
               </v-card>
@@ -36,6 +36,12 @@ export default {
     ad () {
       const id = this.id
       return this.$store.getters.adById(id)
+    },
+    isOwner () {
+      return this.$store.getters.user !== null && this.ad.ownerId === this.$store.getters.user.id
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   components: {

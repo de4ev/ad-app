@@ -43,7 +43,7 @@
                       color="orange accent-2"
                       :to="'/ad/' + ad.id"
                     >Open</v-btn>
-                    <v-btn color="orange accent-2">Buy</v-btn>
+                    <app-buy-modal :ad="ad"></app-buy-modal>
                   </v-card-actions>
                 </v-card>
             </v-flex>

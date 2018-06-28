@@ -36,8 +36,21 @@
           <v-flex xs12>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat @click="onClose">Close</v-btn>
-              <v-btn color="orange" @click="onBuy">Buy</v-btn>
+              <v-btn 
+                flat 
+                @click="onClose"
+                :disabled="localLoading"
+              >
+                Close
+              </v-btn>
+              <v-btn
+                :disabled="localLoading"
+                loading="localLoading"
+                color="orange"
+                @click="onBuy"
+              >
+                Buy
+              </v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>
@@ -53,7 +66,8 @@ export default {
     return {
       name: '',
       phone: '',
-      modal: false
+      modal: false,
+      localLoading: false
     }
   },
   methods: {
@@ -64,6 +78,7 @@ export default {
     },
     onBuy () {
       if (this.name !== '' && this.phone !== '') {
+        this.localLoading = true
         this.$store.dispatch('createOrder', {
           name: this.name,
           phone: this.phone,
@@ -74,6 +89,7 @@ export default {
           this.name = ''
           this.phone = ''
           this.modal = false
+          this.localLoading = false
         })
       }
     }

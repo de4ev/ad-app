@@ -45,7 +45,7 @@
               </v-btn>
               <v-btn
                 :disabled="localLoading"
-                loading="localLoading"
+                :loading="localLoading"
                 color="orange"
                 @click="onBuy"
               >
@@ -82,7 +82,7 @@ export default {
         this.$store.dispatch('createOrder', {
           name: this.name,
           phone: this.phone,
-          id: this.ad.id,
+          adId: this.ad.id,
           ownerId: this.ad.ownerId
         })
         .finally(() => {

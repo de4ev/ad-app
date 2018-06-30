@@ -16,6 +16,7 @@
             <v-card-text>
               <v-text-field
                       v-model="name"
+                      required
                       color="blue-grey darken-1"
                       name="name"
                       label="Your name"
@@ -23,9 +24,18 @@
               ></v-text-field>
               <v-text-field
                     v-model="phone"
+                    required
                     color="blue-grey darken-1"
                     name="phone"
                     label="Your phone"
+                    type="text"
+              ></v-text-field>
+              <v-text-field
+                    v-model="message"
+                    color="blue-grey darken-1"
+                    name="message"
+                    label="Message"
+                    multi-line
                     type="text"
               ></v-text-field>
             </v-card-text>
@@ -44,7 +54,7 @@
                 Close
               </v-btn>
               <v-btn
-                :disabled="localLoading"
+                :disabled="!valid || localLoading"
                 :loading="localLoading"
                 color="orange"
                 @click="onBuy"
@@ -66,28 +76,37 @@ export default {
     return {
       name: '',
       phone: '',
+      message: '',
       modal: false,
       localLoading: false
+    }
+  },
+  computed: {
+    valid () {
+      return this.name !== '' && this.phone !== ''
     }
   },
   methods: {
     onClose () {
       this.name = ''
       this.phone = ''
+      this.message = ''
       this.modal = false
     },
     onBuy () {
-      if (this.name !== '' && this.phone !== '') {
+      if (this.valid) {
         this.localLoading = true
         this.$store.dispatch('createOrder', {
           name: this.name,
           phone: this.phone,
+          message: this.message,
           adId: this.ad.id,
           ownerId: this.ad.ownerId
         })
         .finally(() => {
           this.name = ''
           this.phone = ''
+          this.message = ''
           this.modal = false
           this.localLoading = false
         })

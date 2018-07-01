@@ -13,10 +13,13 @@
                 <v-card-text>
                     <span>{{ad.description}}</span>
                 </v-card-text>
-                <v-card-actions>
+                <v-card-actions v-if="!isOwner">
                   <v-spacer></v-spacer>
-                    <app-edit-ad-modal :ad="ad" v-if="isOwner"></app-edit-ad-modal>
-                <app-buy-modal :ad="ad"></app-buy-modal>
+                  <app-buy-modal :ad="ad"></app-buy-modal>
+                </v-card-actions>
+                <v-card-actions v-else>
+                  <v-spacer></v-spacer>
+                  <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
                 </v-card-actions>
               </v-card>
             </v-flex>

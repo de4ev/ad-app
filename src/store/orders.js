@@ -40,12 +40,14 @@ export default {
       try {
         const fbVal = await fb.database().ref(`/users/${getters.user.id}/orders`).once('value')
         const orders = fbVal.val()
-        Object.keys(orders).forEach(key => {
-          const order = orders[key]
-          resultOrders.push(
-            new Order(order.name, order.phone, order.message, order.adId, order.done, key)
-          )
-        })
+        if (orders !== null) {
+          Object.keys(orders).forEach(key => {
+            const order = orders[key]
+            resultOrders.push(
+              new Order(order.name, order.phone, order.message, order.adId, order.done, key)
+            )
+          })
+        }
         commit('loadOrders', resultOrders)
         commit('setLoading', false)
       } catch (error) {

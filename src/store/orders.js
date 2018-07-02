@@ -58,8 +58,14 @@ export default {
     }
   },
   getters: {
-    orders (state) {
-      return state.orders
+    doneOrders (state) {
+      return state.orders.filter(order => order.done)
+    },
+    undoneOrders (state) {
+      return state.orders.filter(order => !order.done)
+    },
+    orders (state, getters) {
+      return getters.undoneOrders.concat(getters.doneOrders)
     }
   }
 }

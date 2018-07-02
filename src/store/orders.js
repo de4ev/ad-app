@@ -55,6 +55,17 @@ export default {
         commit('setError', error.message)
         throw error
       }
+    },
+    async markOrderDone ({commit, getters}, id) {
+      commit('clearError')
+      try {
+        await fb.database().ref(`/users/${getters.user.id}/orders`).child(id).update({
+          done: true
+        })
+      } catch (error) {
+        commit('setError', error.message)
+        throw error
+      }
     }
   },
   getters: {

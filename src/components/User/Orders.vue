@@ -26,7 +26,12 @@
                       <v-list-tile-sub-title>{{ order.message }}</v-list-tile-sub-title>
                     </v-list-tile-content>
                     <v-spacer></v-spacer>
-                    <v-btn color="orange accent-2">Open</v-btn>
+                    <v-btn
+                      color="orange accent-2"
+                      :to="'/ad/' + order.adId"
+                    >
+                      Open
+                    </v-btn>
                   </v-list-tile>
                 </v-list>
             </v-flex>
@@ -46,7 +51,11 @@ export default {
   },
   methods: {
     changeStatus (order) {
-      order.done = !order.done
+      this.$store.dispatch('markOrderDone', order.id)
+        .then(() => {
+          order.done = true
+        })
+        .catch(() => {})
     }
   },
   created () {

@@ -8,7 +8,14 @@
               v-for="ad in promoAds"
               :src="ad.src"
               :key="ad.id"
-            ></v-carousel-item>
+            >
+              <div class="ad-btn">
+                <v-btn
+                  color="orange accent-2"
+                  :to="'/ad/' + ad.id"
+                >{{ ad.title }}</v-btn>
+              </div>
+            </v-carousel-item>
           </v-carousel>
         </v-flex>
       </v-layout>
@@ -82,5 +89,14 @@ export default {
   }
   .jumbotron__image {
     width: 100%;
+  }
+  .ad-btn {
+    position: absolute;
+    bottom: 50px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 5px 5px 0 0;
+    left: 50%;
+    transform: translate(-50%, 0)
   }
 </style>

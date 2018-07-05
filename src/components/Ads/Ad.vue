@@ -19,6 +19,7 @@
                 </v-card-actions>
                 <v-card-actions v-else>
                   <v-spacer></v-spacer>
+                  <app-delete-ad-modal :ad="ad"></app-delete-ad-modal>
                   <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
                 </v-card-actions>
               </v-card>
@@ -32,6 +33,7 @@
 
 <script>
 import EditAdModal from './EditAdModal'
+import DeleteAdModal from './DeleteAdModal'
 
 export default {
   props: ['id'],
@@ -48,7 +50,8 @@ export default {
     }
   },
   components: {
-    AppEditAdModal: EditAdModal
+    AppEditAdModal: EditAdModal,
+    AppDeleteAdModal: DeleteAdModal
   }
 }
 </script>

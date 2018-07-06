@@ -16,8 +16,16 @@ export default {
     ads: []
   },
   mutations: {
-    createAd (state, payload) {
-      state.ads.push(payload)
+    createAd (state, ad) {
+      state.ads.push(
+        new Ad(
+          ad.title,
+          ad.description,
+          ad.ownerId,
+          ad.src,
+          ad.promo,
+          ad.id
+      ))
     },
     loadAds (state, payload) {
       state.ads = payload
@@ -28,6 +36,8 @@ export default {
       })
       ad.title = title
       ad.description = description
+    },
+    deleteAd (state, {id}) {
     }
   },
   actions: {
@@ -105,6 +115,19 @@ export default {
         commit('updateAd', {
           title, description, id
         })
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setError', error.message)
+        commit('setLoading', false)
+        throw error
+      }
+    },
+    async deleteAd ({commit}, {id}) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        await fb.database().ref('ads').child(id).remove()
+        commit('deleteAd', {id})
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)

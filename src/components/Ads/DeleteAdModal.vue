@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="500px" v-model="modal">
+  <v-dialog width="450px" v-model="modal">
     <v-btn flat color="orange" slot="activator">Delete</v-btn>
     <v-card>
       <v-container>
@@ -51,7 +51,7 @@ export default {
       this.modal = false
     },
     onDelete () {
-      this.$store.dispatch('deleteAd', this.ad)
+      this.$store.dispatch('deleteAd', {id: this.ad.id})
         .then(() => {
           this.$router.push('/list')
           this.modal = false

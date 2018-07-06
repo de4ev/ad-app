@@ -37,8 +37,16 @@
           <v-flex xs12>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat @click="onCancel">Cancel</v-btn>
-              <v-btn color="orange" @click="onSave">Save</v-btn>
+              <v-btn
+                flat
+                @click="onCancel"
+              >Cancel
+              </v-btn>
+              <v-btn
+                color="orange"
+                @click="onSave"
+              >Save
+              </v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>

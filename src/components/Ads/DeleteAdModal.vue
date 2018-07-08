@@ -27,8 +27,16 @@
           <v-flex xs12>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn flat @click="onCancel">Cancel</v-btn>
-              <v-btn color="error" @click="onDelete">Delete</v-btn>
+              <v-btn 
+                flat
+                @click="onCancel"
+              >Cancel
+              </v-btn>
+              <v-btn 
+                color="error"
+                @click="onDelete"
+              >Delete
+              </v-btn>
             </v-card-actions>
           </v-flex>
         </v-layout>

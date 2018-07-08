@@ -42,7 +42,12 @@
         </v-layout>
         <v-layout row v-else>
           <v-flex xs12 class="text-xs-center home__loader-margin">
-            <v-progress-circular :size="70" :width="4" indeterminate color="orange accent-2"></v-progress-circular>
+            <v-progress-circular
+              :size="70" 
+              :width="4" 
+              indeterminate 
+              color="orange accent-2"
+            ></v-progress-circular>
           </v-flex>
         </v-layout>
     </v-container>

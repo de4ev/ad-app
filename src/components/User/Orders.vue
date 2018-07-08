@@ -2,7 +2,12 @@
     <v-container>
         <v-layout row>
             <v-flex xs12 class="text-xs-center mt-5" v-if="loading">
-                <v-progress-circular :size="70" :width="4" indeterminate color="orange accent-2"></v-progress-circular>
+                <v-progress-circular 
+                  :size="70" 
+                  :width="4" 
+                  indeterminate 
+                  color="orange accent-2"
+                ></v-progress-circular>
             </v-flex>
             <v-flex xs12 sm6 offset-sm3 v-else-if="!loading && orders.length === 0">
               <h1 class="text--secondary mb-2">You have no orders</h1>

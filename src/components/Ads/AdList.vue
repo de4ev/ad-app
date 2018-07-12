@@ -62,6 +62,9 @@ export default {
     loading () {
       return this.$store.getters.loading
     }
+  },
+  created () {
+    this.$store.dispatch('fetchAds')
   }
 }
 </script>

@@ -36,8 +36,6 @@ export default {
       })
       ad.title = title
       ad.description = description
-    },
-    deleteAd (state, {id}) {
     }
   },
   actions: {
@@ -127,7 +125,6 @@ export default {
       commit('setLoading', true)
       try {
         await fb.database().ref('ads').child(id).remove()
-        commit('deleteAd', {id})
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)

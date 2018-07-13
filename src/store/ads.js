@@ -1,11 +1,12 @@
 import * as fb from 'firebase'
 
 class Ad {
-  constructor (title, description, ownerId, src = '', promo = false, id = null) {
+  constructor (title, description, ownerId, src = '', imageName = '', promo = false, id = null) {
     this.title = title
     this.description = description
     this.ownerId = ownerId
     this.src = src
+    this.imageName = imageName
     this.promo = promo
     this.id = id
   }
@@ -23,6 +24,7 @@ export default {
           ad.description,
           ad.ownerId,
           ad.src,
+          ad.imageName,
           ad.promo,
           ad.id
       ))
@@ -51,12 +53,14 @@ export default {
           payload.description,
           getters.user.id,
           '',
+          '',
           payload.promo
         )
         const ad = await fb.database().ref('ads').push(newAd)
         const imageExt = image.name.slice(image.name.lastIndexOf('.'))
-        await fb.storage().ref(`ads/${ad.key}${imageExt}`).put(image)
-        const src = await fb.storage().ref(`ads/${ad.key}${imageExt}`).getDownloadURL()
+        const imageName = `${ad.key}${imageExt}`
+        await fb.storage().ref(`ads/${imageName}`).put(image)
+        const src = await fb.storage().ref(`ads/${imageName}`).getDownloadURL()
           .then(function (url) {
             return url
           })
@@ -67,7 +71,8 @@ export default {
         commit('createAd', {
           ...newAd,
           id: ad.key,
-          src
+          src,
+          imageName
         })
       } catch (error) {
         commit('setLoading', false)
@@ -120,11 +125,24 @@ export default {
         throw error
       }
     },
-    async deleteAd ({commit}, {id}) {
+    async deleteAd ({commit}, {id, imageName}) {
       commit('clearError')
       commit('setLoading', true)
       try {
         await fb.database().ref('ads').child(id).remove()
+        console.log(imageName)
+        // await fb.storage().ref(`ads/${id}${imageExt}`).put(image)
+        // await fb.storage().ref('ads').child(src);
+
+        // Create a reference to the file to delete
+        // var desertRef = storageRef.child('images/desert.jpg');
+
+        // Delete the file
+        // desertRef.delete().then(function() {
+          // File deleted successfully
+        // }).catch(function(error) {
+          // Uh-oh, an error occurred!
+        // });
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)

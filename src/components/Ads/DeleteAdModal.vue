@@ -59,12 +59,15 @@ export default {
       this.modal = false
     },
     onDelete () {
-      this.$store.dispatch('deleteAd', {id: this.ad.id})
-        .then(() => {
-          this.$router.push('/list')
-          this.modal = false
-        })
-        .catch(() => {})
+      this.$store.dispatch('deleteAd', {
+        id: this.ad.id,
+        imageName: this.ad.imageName
+      })
+      .then(() => {
+        this.$router.push('/list')
+        this.modal = false
+      })
+      .catch(() => {})
     }
   }
 }

@@ -59,10 +59,7 @@ export default {
       this.modal = false
     },
     onDelete () {
-      this.$store.dispatch('deleteAd', {
-        id: this.ad.id,
-        imageName: this.ad.imageName
-      })
+      this.$store.dispatch('deleteAd', {ad: this.ad})
       .then(() => {
         this.$router.push('/list')
         this.modal = false

@@ -1,12 +1,12 @@
 import * as fb from 'firebase'
 
 class Ad {
-  constructor (title, description, ownerId, src = '', imageName = '', promo = false, id = null) {
+  constructor (title, description, ownerId, imgName = '', src = '', promo = false, id = null) {
     this.title = title
     this.description = description
     this.ownerId = ownerId
+    this.imgName = imgName
     this.src = src
-    this.imageName = imageName
     this.promo = promo
     this.id = id
   }
@@ -23,8 +23,8 @@ export default {
           ad.title,
           ad.description,
           ad.ownerId,
+          ad.imgName,
           ad.src,
-          ad.imageName,
           ad.promo,
           ad.id
       ))
@@ -58,21 +58,22 @@ export default {
         )
         const ad = await fb.database().ref('ads').push(newAd)
         const imageExt = image.name.slice(image.name.lastIndexOf('.'))
-        const imageName = `${ad.key}${imageExt}`
-        await fb.storage().ref(`ads/${imageName}`).put(image)
-        const src = await fb.storage().ref(`ads/${imageName}`).getDownloadURL()
+        const imgName = `${ad.key}${imageExt}`
+        await fb.storage().ref(`ads/${imgName}`).put(image)
+        const src = await fb.storage().ref(`ads/${imgName}`).getDownloadURL()
           .then(function (url) {
             return url
           })
         await fb.database().ref('ads').child(ad.key).update({
-          src
+          src,
+          imgName
         })
         commit('setLoading', false)
         commit('createAd', {
           ...newAd,
           id: ad.key,
-          src,
-          imageName
+          imgName,
+          src
         })
       } catch (error) {
         commit('setLoading', false)
@@ -95,6 +96,7 @@ export default {
               ad.title,
               ad.description,
               ad.ownerId,
+              ad.imgName,
               ad.src,
               ad.promo,
               key
@@ -125,24 +127,12 @@ export default {
         throw error
       }
     },
-    async deleteAd ({commit}, {id, imageName}) {
+    async deleteAd ({commit}, {ad}) {
       commit('clearError')
       commit('setLoading', true)
       try {
-        await fb.database().ref('ads').child(id).remove()
-        console.log(imageName)
-        // await fb.storage().ref(`ads/${id}${imageExt}`).put(image)
-        // await fb.storage().ref('ads').child(src);
-
-        // Create a reference to the file to delete
-        // var desertRef = storageRef.child('images/desert.jpg');
-
-        // Delete the file
-        // desertRef.delete().then(function() {
-          // File deleted successfully
-        // }).catch(function(error) {
-          // Uh-oh, an error occurred!
-        // });
+        await fb.database().ref('ads').child(ad.id).remove()
+        await fb.storage().ref('ads').child(`${ad.imgName}`).delete()
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message)

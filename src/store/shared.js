@@ -1,7 +1,8 @@
 export default {
   state: {
     loading: false,
-    error: false
+    error: false,
+    message: ''
   },
   mutations: {
     setLoading (state, payload) {
@@ -31,6 +32,9 @@ export default {
     },
     error (state) {
       return state.error
+    },
+    message (state) {
+      return state.message
     }
   }
 }

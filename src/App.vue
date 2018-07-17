@@ -69,9 +69,25 @@
         :value="true"
       >
         {{ error }}
-        <v-btn flat color="error" @click.native="closeError">Close</v-btn>
+        <v-btn
+          flat 
+          color="error" 
+          @click.native="closeError"
+        >
+          Close
+        </v-btn>
       </v-snackbar>
     </template>
+    <template v-if="message">
+      <v-snackbar
+        color="blue-grey darken-1"
+        :value="true"
+        :right="true"
+        :timeout=6000
+      >
+        {{ message }}
+      </v-snackbar>
+  </template>
   </v-app>
 </template>
 
@@ -85,6 +101,9 @@ export default {
   computed: {
     error () {
       return this.$store.getters.error
+    },
+    message () {
+      return this.$store.getters.message
     },
     isUserLoggedIn () {
       return this.$store.getters.isUserLoggedIn

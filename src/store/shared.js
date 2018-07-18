@@ -13,6 +13,12 @@ export default {
     },
     clearError (state) {
       state.error = null
+    },
+    setMessage (state, payload) {
+      state.message = payload
+    },
+    clearMessage (state) {
+      state.message = ''
     }
   },
   actions: {
@@ -24,6 +30,12 @@ export default {
     },
     clearError ({commit}) {
       commit('clearError')
+    },
+    setMessage ({commit}, payload) {
+      commit('setMessage', payload)
+    },
+    clearMessage ({commit}) {
+      commit('clearMessage')
     }
   },
   getters: {

@@ -43,6 +43,7 @@ export default {
   actions: {
     async createAd ({commit, getters}, payload) {
       commit('clearError')
+      commit('clearMessage')
       commit('setLoading', true)
 
       const image = payload.image
@@ -75,6 +76,7 @@ export default {
           imgName,
           src
         })
+        commit('setMessage', 'New ad created')
       } catch (error) {
         commit('setLoading', false)
         commit('setError', error.message)
@@ -112,6 +114,7 @@ export default {
     },
     async updateAd ({commit}, {title, description, id}) {
       commit('clearError')
+      commit('clearMessage')
       commit('setLoading', true)
       try {
         await fb.database().ref('ads').child(id).update({
@@ -121,6 +124,7 @@ export default {
           title, description, id
         })
         commit('setLoading', false)
+        commit('setMessage', 'Ad updated')
       } catch (error) {
         commit('setError', error.message)
         commit('setLoading', false)
@@ -129,11 +133,13 @@ export default {
     },
     async deleteAd ({commit}, {ad}) {
       commit('clearError')
+      commit('clearMessage')
       commit('setLoading', true)
       try {
         await fb.database().ref('ads').child(ad.id).remove()
         await fb.storage().ref('ads').child(`${ad.imgName}`).delete()
         commit('setLoading', false)
+        commit('setMessage', 'Ad deleted')
       } catch (error) {
         commit('setError', error.message)
         commit('setLoading', false)

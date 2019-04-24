@@ -32,6 +32,11 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
+                  @click="demoLogin"
+                  :loading="loading"
+                  color="info"
+                  >Demo</v-btn>
+                <v-btn
                   @click="onSubmit"
                   :loading="loading"
                   :disabled="!valid || loading"
@@ -79,6 +84,17 @@ export default {
           })
           .catch(() => {})
       }
+    },
+    demoLogin () {
+      const user = {
+          email: 'demo@mail.com',
+          password: '111111'
+        }
+        this.$store.dispatch('loginUser', user)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(() => {})
     }
   },
   created () {

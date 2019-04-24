@@ -1,4 +1,5 @@
-import * as fb from 'firebase'
+import * as fb from 'firebase/app'
+import 'firebase/database'
 
 class Order {
   constructor (name, phone, message, adId, done = false, id = null) {

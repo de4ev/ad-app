@@ -1,4 +1,6 @@
-import * as fb from 'firebase'
+import * as fb from 'firebase/app'
+import 'firebase/database'
+import 'firebase/storage'
 
 class Ad {
   constructor (title, description, ownerId, imgName = '', src = '', promo = false, id = null) {
